@@ -1,0 +1,7 @@
+m = 7,
+n = 85;
+//comentario
+c = "okjspakd ***   dsa---  asdkk"
+SI m < n entonces(
+      imprimir m*n
+)
