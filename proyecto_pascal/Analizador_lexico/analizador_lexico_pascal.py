@@ -72,6 +72,10 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_error (t):
+    print "caracter ilegal '%s'" % t.value[0]
+    t.lexer.skip(1)
+
 #BBusca y muestra los archivos de una ubicacion
 def buscarFichero(directorio):
     ficheros = []
