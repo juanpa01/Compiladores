@@ -3,7 +3,6 @@ import re
 import sys
 import codecs
 import os
-#import symtab
 
 #Palabras reservadas del sistema
 reservadas = ['ELSE','IF','INT','FLOAT','RETURN','WHILE','FUN','BEGIN','DO','THEN',
@@ -14,7 +13,7 @@ tokens = reservadas + ['PLUS','MINUS','ASTERIK','SLASH','EQUAL','LESS',
                     'POINTER','LPARENT','RPARENT','LESSGREATER','LESSEQUAL','GREATEREQUEAL',
                     'ASSIGMENT',
                     #otros
-                    'ID','NUMBER','TEXT']
+                    'ID','INTNUMBER','FLOATNUMBER','TEXT']
 
 #Tabla de simbolos
 t_ignore = ' \t'
@@ -55,9 +54,15 @@ def t_COMENT2 (t):
     r'\{(.|\n)*\}'
     pass  #reconoce el comentario pero no va hacer nada
 
-def t_NUMBER (t):
-    r'\d+(\.\d+)?'
+
+def t_FLOATNUMBER (t):
+    r'\d+(\.\d+(e(\+|-)?\d+)?|e[\+|-]?\d+)'
     t.value = float(t.value)
+    return t
+
+def t_INTNUMBER (t):
+    r'0(?!\d)|([1-9]\d*)'
+    t.value = int(t.value)
     return t
 
 def t_TEXT (t):

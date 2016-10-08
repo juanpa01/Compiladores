@@ -11,6 +11,7 @@ from sys import stdin
 precedence = (
             #derecha a izquierda
             ('rigth','ASSIGMENT'),
+            ('rigth','ELSE'),
             #izquierda a derecha
             ('left','MINUS','PLUS'),
             ('left','AND','OR'),
@@ -45,7 +46,7 @@ def p_declaration_variables (p):
     print "declaration_variables"
 
 def p_declaration_variables2 (p):
-    '''declaration_variables : declaration_variables COMMA param'''
+    'declaration_variables : declaration_variables COMMA param'
     print "declaration_variables2"
 
 def p_param (p):
@@ -307,7 +308,7 @@ fp = codecs.open(test,"r", "utf-8") #abre el archivo
 cadena = fp.read()  #lee el archivo y lo guarda en una cadena
 fp.close()          #cierra el archivo
 
-parser = yacc.yacc('SLR')
+parser = yacc.yacc()
 result = parser.parse(cadena)
 
 print result
