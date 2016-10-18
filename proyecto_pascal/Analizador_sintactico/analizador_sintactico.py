@@ -301,7 +301,7 @@ def buscarFichero(directorio):
     return files[int(numArchivo)-1]
 
 #ruta donde se ecuentra los archvos de prueba
-directorio = "/home/juan/Escritorio/Compiladores/proyecto_pascal/Analizador_lexico/pruebas/"
+directorio = "/home/juan/Escritorio/Compiladores/proyecto_pascal/Analizador_sintactico/pruebas/"
 archivo = buscarFichero(directorio) #guarda el archivo que selecciono en la funcion
 test = directorio + archivo     #concatena la ruta de prueba con la ubicacion del archivo
 fp = codecs.open(test,"r", "utf-8") #abre el archivo
