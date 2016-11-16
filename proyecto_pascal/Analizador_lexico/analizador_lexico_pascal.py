@@ -38,12 +38,17 @@ t_SEMICOLON = r';'
 t_POINTER = r'\^'
 t_ASSIGMENT = r':='
 
+
 def t_ID (t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value.upper() in reservadas:
         t.value = t.value.upper()
         t.type = t.value
     return t
+
+def t_malformed_id(t):
+    r'(\d+)[A-Za-z]'
+    print "Linea "+str(t.lineno) + " ID no valido "+t.value
 
 def t_COMENT1 (t):
     r'\(\*(.|\n)*\*\)'

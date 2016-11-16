@@ -10,8 +10,8 @@ from sys import stdin
 
 precedence = (
             #derecha a izquierda
-            ('rigth','ASSIGMENT'),
             ('rigth','ELSE'),
+            ('rigth','ASSIGMENT'),
             #izquierda a derecha
             ('left','MINUS','PLUS'),
             ('left','AND','OR'),

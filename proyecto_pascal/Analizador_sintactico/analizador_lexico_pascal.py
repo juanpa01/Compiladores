@@ -9,7 +9,7 @@ reservadas = ['ELSE','IF','INT','FLOAT','RETURN','WHILE','FUN','BEGIN','DO','THE
             'END','PRINT','READ','WRITE','SKIP','BREAK','AND','OR','NOT',]
                         #simbolos
 tokens = reservadas + ['PLUS','MINUS','ASTERIK','SLASH','EQUAL','LESS',
-                    'GREATER','DISTINT','LBRACKET','RBRACKET','PERIOD','COMMA','COLON','SEMICOLON',
+                    'GREATER','LBRACKET','RBRACKET','PERIOD','COMMA','COLON','SEMICOLON',
                     'POINTER','LPARENT','RPARENT','LESSGREATER','LESSEQUAL','GREATEREQUEAL',
                     'ASSIGMENT',
                     #otros
@@ -27,7 +27,6 @@ t_LESSEQUAL = r'<='
 t_GREATER = r'>'
 t_GREATEREQUEAL = r'>='
 t_LESSGREATER = r'<>'
-t_DISTINT = r'!='
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
 t_LPARENT = r'\('
@@ -39,12 +38,17 @@ t_SEMICOLON = r';'
 t_POINTER = r'\^'
 t_ASSIGMENT = r':='
 
+
 def t_ID (t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value.upper() in reservadas:
         t.value = t.value.upper()
         t.type = t.value
     return t
+
+def t_ID_malo(t):
+    r'(\d+)[A-Za-z]'
+    print "Linea "+str(t.lineno) + " ID no valido "+t.value
 
 def t_COMENT1 (t):
     r'\(\*(.|\n)*\*\)'
@@ -83,7 +87,6 @@ def t_error (t):
     t.lexer.skip(1)
 
 #BBusca y muestra los archivos de una ubicacion
-'''
 def buscarFichero(directorio):
     ficheros = []
     numArchivo = ''
@@ -113,14 +116,12 @@ test = directorio + archivo     #concatena la ruta de prueba con la ubicacion de
 fp = codecs.open(test,"r", "utf-8") #abre el archivo
 cadena = fp.read()  #lee el archivo y lo guarda en una cadena
 fp.close()          #cierra el archivo
-'''
 analizador = lex.lex()
-#analizador.input(cadena)   #se ingresa como entrada la cadena para ser analizado
+analizador.input(cadena)   #se ingresa como entrada la cadena para ser analizado
 
-'''
+
 while True:
     tok = analizador.token()
     if not tok :
         break
     print tok
-'''
