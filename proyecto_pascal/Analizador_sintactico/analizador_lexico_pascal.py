@@ -46,6 +46,11 @@ def t_ID (t):
         t.type = t.value
     return t
 
+
+def t_ID_error(t):
+    r'((\d+))[A-Za-z]'
+    print "Linea "+str(t.lineno)+": ID no valido "+t.value
+
 def t_COMENT1 (t):
     r'\(\*(.|\n)*\*\)'
     pass  #reconoce el comentario pero no va hacer nada
