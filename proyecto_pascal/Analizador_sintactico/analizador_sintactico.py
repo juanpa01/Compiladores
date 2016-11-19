@@ -6,8 +6,6 @@ import os
 from analizador_lexico_pascal import tokens
 from sys import stdin
 
-#se define la precedencia de los operadores
-
 precedence = (
             #derecha a izquierda
             ('rigth','ASSIGMENT'),
