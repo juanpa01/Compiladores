@@ -1,0 +1,127 @@
+
+program :  PROGRAM ID ; block .
+block :    constant-definition-part variable-declaration-part function-declaration-part statement-part
+
+constant_definitio_-part :  CONST constant_definition  ;
+                            empty
+
+constant_definition : ID constant_definition
+                      , ID
+                      = INTNUMBER constant_definition
+                      ID = INTNUMBER
+
+variable_declaration_part : variable_declaration_part VAR id_list : type ;
+                            empty
+
+id_list : ID
+          id_list , ID
+
+type : INT
+       FLOAT
+       STRING
+       CHAR
+       BOOLEAN
+
+function_declaration_part : FUN ID arguments : type ; block
+
+arguments : (parameter_list)
+            empty
+
+parameter_list : id_list : type
+                parameter_list ; id_list : type
+
+stament_part : compound_stament
+
+compoun_stament : BEGIN staments SEMICOLON END
+
+staments : stament
+           staments SEMICOLON stament
+
+stament : simple_stament
+          estructured_stament
+
+simple_stament :  assigment_stament
+                  procedure_stament
+                  aplication
+                  read_stament
+                  write_stament
+                  writeln_stament
+
+assigment_stament : ID LBRACKET expression RBRACKET ASSIGMENT expression
+                    ID ASSIGMENT expression
+
+procedure_stament : procedure_id
+
+aplication : ID LPARENT output_value RPARENT
+
+read_stament : READ LPARENT id_list RPARENT
+               READLN LPARENT id_list RPARENT
+
+write_stament : WRITE LPARENT output_value RPARENT
+
+writeln_stanent : WRITELN
+                  WRITELN LPARENT output_value RPARENT
+
+procedure_id : ID
+
+output_value : expression
+               output_value COMMA expression
+               empty
+
+
+structured_stament : compoun_statement
+                     if_stanent
+                     while_stament
+                     for_stanent
+
+if_stament : IF expression THEN stament
+             IF expression THEN stament ELSE stament
+
+while_stament : WHILE expression DO stament
+
+for_stanent :  FOR ID ASSIGMENT expression TO expression DO stament
+               FOR ID ASSIGMENT expression DOWNTO expression DO stament
+
+expression : simple_expression
+             simple_expression relational_operator
+
+simple_expression : term adding_operator
+
+adding_operator : operator term
+                  adding_operator  operator term
+                  empty
+
+term : factor multiplying_operator
+
+multiplying_operator : multiplying factor
+                       multiplying_operator multiplying factor
+                       empty
+
+factor : aplication
+         variable
+         constant
+         LPARENT expression RPARENT
+         NOT factor
+
+relational_operator : EQUAL
+                      GREATER
+                      GREATEREQUEAL
+                      LESS
+                      LESSEQUAL
+                      LESSGREATER
+
+operator : PLUS
+           MINUS
+           OR
+
+multiplying : ASTERIK
+              SLASH
+              AND
+
+variable : ID
+           ID LPARENT expression RPARENT
+
+constant : INTNUMBER
+           ID
+           CHAR
+           STRING

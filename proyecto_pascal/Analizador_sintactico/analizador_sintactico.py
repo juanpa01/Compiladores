@@ -20,64 +20,56 @@ precedence = (
             )
 
 def p_program (p):
-    '''program : function'''
+    '''program : PROGRAM ID SEMICOLON block PERIOD'''
     print "program"
 
-def p_program2 (p):
-    '''program : program function'''
-    print "program2"
+def p_block (p):
+    '''block : constant_definition_part variable_declaration_part function_declaration_part stament_part'''
+    print "block"
 
-def p_function (p):
-    '''function : FUN ID arguments locals BEGIN staments END'''
-    print "function"
+def p_constant_definition_part (p):
+    '''constant_definition_part : constant_definition_part CONST constant_definition SEMICOLON'''
+    print "constant_definition_part"
 
-def p_arguments (p):
-    '''arguments : LPARENT RPARENT'''
-    print "arguments"
-
-def p_arguments2 (p):
-    '''arguments : LPARENT declaration_variables RPARENT'''
-    print "arguments2"
-
-def p_declaration_variables (p):
-    '''declaration_variables : param'''
-    print "declaration_variables"
-
-def p_declaration_variables2 (p):
-    'declaration_variables : declaration_variables COMMA param'
-    print "declaration_variables2"
-
-def p_param (p):
-    '''param : ID COLON type'''
-    print "param"
-
-def p_param2 (p):
-    '''param : ID COLON'''
-    print "param2"
-
-def p_locals (p):
-    '''locals : dec_list SEMICOLON'''
-    print "locals"
-
-def p_localsEmpty (p):
-    '''locals : empty'''
+def p_constant_definition_part2 (p):
+    '''constant_definition_part : empty'''
     print "nulo"
 
-def p_dec_list (p):
-    '''dec_list : var_dec'''
-    print "dec_list"
+def p_constant_definition (p):
+    '''constant_definition : ID constant_definition'''
+    print "constant_definition"
 
-def p_dec_list2 (p):
-    '''dec_list : dec_list SEMICOLON var_dec'''
-    print "dec_list2"
+def p_constant_definition2 (p):
+    '''constant_definition : COMMA ID constant_definition'''
+    print "constant_definition2"
 
-def p_var_dec (p):
-    '''var_dec : param'''
-    print "var_dec"
+def p_constant_definition3 (p):
+    '''constant_definition : EQUAL INTNUMBER constant_definition'''
+    print "constant_definition3"
 
-def p_var_dec2 (p):
-    '''var_dec : function'''
-    print "var_dec2"
+def p_constant_definition4 (p):
+    '''constant_definition : EQUAL FLOATNUMBER constant_definition'''
+    print "constant_definition4"
+
+def p_constant_definition5 (p):
+    '''constant_definition : empty'''
+    print "nulo"
+
+def p_variable_declaration_part (p):
+    '''variable_declaration_part : variable_declaration_part VAR id_list COLON type SEMICOLON'''
+    print "variable_declaration_part"
+
+def p_variable_declaration_part2 (p):
+    '''variable_declaration_part : empty'''
+    print "nulo"
+
+def p_id_list (p):
+    '''id_list : ID'''
+    print "id_list"
+
+def p_id_list2 (p):
+    '''id_list : id_list COMMA ID'''
+    print "id_list2"
 
 def p_type (p):
     '''type : INT'''
@@ -88,12 +80,48 @@ def p_type2 (p):
     print "type2"
 
 def p_type3 (p):
-    '''type : INT LBRACKET expression RBRACKET'''
-    print "type3"
+    '''type : STRING'''
+    print ""
 
 def p_type4 (p):
-    '''type : FLOAT LBRACKET expression RBRACKET'''
+    '''type : CHAR'''
     print "type4"
+
+def p_type5 (p):
+    '''type : BOOLEAN'''
+    print "type5"
+
+def p_function_declaration_part (p):
+    '''function_declaration_part : FUN ID arguments COLON type SEMICOLON block '''
+    print "function_declaration_part"
+
+def p_function_declaration_part2 (p):
+    '''function_declaration_part : empty'''
+    print "nulo"
+
+def p_arguments (p):
+    '''arguments : LPARENT parameter_list RPARENT'''
+    print "arguments"
+
+def p_arguments2 (p):
+    '''arguments : empty'''
+    print "nulo"
+
+def p_parameter_list (p):
+    '''parameter_list : id_list COLON type'''
+    print "parameter_list"
+
+def p_parameter_list2 (p):
+    '''parameter_list : parameter_list SEMICOLON id_list COLON type'''
+    print "parameter_list2"
+
+def p_stament_part (p):
+    '''stament_part : compound_stament'''
+    print "stament_part"
+
+def p_compound_stament (p):
+    '''compound_stament : BEGIN staments SEMICOLON END'''
+    print "compound_stament"
 
 def p_staments (p):
     '''staments : stament'''
@@ -104,168 +132,260 @@ def p_staments2 (p):
     print "staments2"
 
 def p_stament (p):
-    '''stament : WHILE relation DO stament'''
+    '''stament : simple_stament'''
     print "stament"
 
 def p_stament2 (p):
-    '''stament : IF relation THEN stament else'''
-    print "stament2"
+    '''stament : structured_stament'''
+    print "stament"
 
-def p_stament3 (p):
-    '''stament : ID ASSIGMENT expression'''
-    print "stament3"
+def p_simple_stament (p):
+    '''simple_stament : assigment_stament'''
+    print "simple_stament"
 
-def p_stament4 (p):
-    '''stament : PRINT LPARENT TEXT RPARENT'''
-    print "stament4"
+def p_simple_stament2 (p):
+    '''simple_stament : procedure_stament'''
+    print "simple_stament2"
 
-def p_stament5 (p):
-    '''stament : WRITE LPARENT expression RPARENT'''
-    print "stament5"
+def p_simple_stament3 (p):
+    '''simple_stament : aplication'''
+    print "simple_stament3"
 
-def p_stament6 (p):
-    '''stament : READ LPARENT location_read RPARENT'''
-    print "stament6"
+def p_simple_stament4 (p):
+    '''simple_stament : read_stament'''
+    print "simple_stament4"
 
-def p_stament7 (p):
-    '''stament : RETURN expression'''
-    print "stament7"
+def p_simple_stament5 (p):
+    '''simple_stament : write_stament'''
+    print "simple_stament5"
 
-def p_stament8 (p):
-    '''stament : ID LPARENT expression RPARENT'''
-    print "stament8"
+def p_simple_stament6 (p):
+    '''simple_stament : writeln_stament'''
+    print "simple_stament6"
 
-def p_stament9 (p):
-    '''stament : SKIP SEMICOLON'''
-    print "stament9"
+def p_assigment_stament (p):
+    '''assigment_stament : ID LBRACKET expression RBRACKET ASSIGMENT expression'''
+    print "assigment_stament"
 
-def p_stament10 (p):
-    '''stament : BREAK SEMICOLON'''
-    print "stament10"
+def p_assigment_stament2 (p):
+    '''assigment_stament : ID ASSIGMENT expression'''
+    print "assigment_stament2"
 
-def p_stament11 (p):
-    '''stament : BEGIN staments END'''
-    print "stament11"
+def p_procedure_stament (p):
+    '''procedure_stament : procedure_id'''
+    print "procedure_stament"
 
-def p_else (p):
-    '''else : ELSE stament'''
-    print "else"
+def p_aplication (p):
+    '''aplication : ID LPARENT output_value RPARENT'''
+    print "aplication"
 
-def p_elseEmpty (p):
-    '''else : empty'''
+def p_read_stament (p):
+    '''read_stament : READ LPARENT id_list RPARENT'''
+    print "read_stament"
+
+def p_read_stament2 (p):
+    '''read_stament : READLN LPARENT id_list RPARENT'''
+    print "read_stament2"
+
+def p_write_stament (p):
+    '''write_stament : WRITE LPARENT output_value RPARENT'''
+    print "write_stament"
+
+def p_writeln_stament (p):
+    '''writeln_stament : WRITELN'''
+    print "writeln_stament"
+
+def p_writeln_stament2 (p):
+    '''writeln_stament : WRITELN LPARENT output_value RPARENT'''
+    print "writeln_stament2"
+
+def p_procedure_id (p):
+    '''procedure_id : ID'''
+    print "procedure_id"
+
+def p_output_value (p):
+    '''output_value : expression'''
+    print "output_value"
+
+def p_output_value2 (p):
+    '''output_value : output_value COMMA expression'''
+    print "output_value2"
+
+def p_output_value3 (p):
+    '''output_value : empty'''
     print "nulo"
 
-def p_location_read (p):
-    '''location_read : ID'''
-    print "location_read"
+def p_structured_stament (p):
+    '''structured_stament : compound_stament'''
+    print "structured_stament"
 
-def p_location_read2 (p):
-    '''location_read : ID LBRACKET expression RBRACKET'''
-    print "location_read2"
+def p_structured_stament2 (p):
+    '''structured_stament : if_stament'''
+    print "structured_stament2"
+
+def p_structured_stament3 (p):
+    '''structured_stament : while_stament'''
+    print "structured_stament3"
+
+def p_structured_stament4 (p):
+    '''structured_stament : for_stament'''
+    print "structured_stament4"
+
+def p_if_stament (p):
+    '''if_stament : IF expression THEN stament'''
+    print "if_stament"
+
+def p_if_stament2 (p):
+    '''if_stament : IF expression THEN stament ELSE stament'''
+    print "if_stament2"
+
+def p_while_stament (p):
+    '''while_stament : WHILE expression DO stament'''
+    print "while_stament"
+
+def p_for_stament (p):
+    '''for_stament : FOR ID ASSIGMENT expression TO expression DO stament'''
+    print "for_stament"
+
+def p_for_stament2 (p):
+    '''for_stament : FOR ID ASSIGMENT expression DOWNTO expression DO stament'''
+    print "for_stament2"
 
 def p_expression (p):
-    '''expression : expression PLUS expression'''
+    '''expression : simple_expression'''
     print "expression"
 
 def p_expression2 (p):
-    '''expression : expression SLASH expression'''
+    '''expression : simple_expression relational_operator simple_expression'''
     print "expression2"
 
-def p_expression3 (p):
-    '''expression : expression ASTERIK expression'''
-    print "expression3"
+def p_simple_expression (p):
+    '''simple_expression : term adding_operator'''
+    print "simple_expression"
 
-def p_expression4 (p):
-    '''expression : expression MINUS expression'''
-    print "expression4"
+def p_adding_operator (p):
+    '''adding_operator : operator term'''
+    print "adding_operator"
 
-def p_expression5 (p):
-    '''expression : MINUS expression'''
-    print "expression5"
+def p_adding_operator2 (p):
+    '''adding_operator : adding_operator operator term'''
+    print "adding_operator2"
 
-def p_expression6 (p):
-    '''expression : LPARENT expression RPARENT'''
-    print "expression6"
-
-def p_expression7 (p):
-    '''expression : ID LPARENT expression_list RPARENT'''
-    print "expression7"
-
-def p_expression8 (p):
-    '''expression : ID'''
-    print "expression8"
-
-def p_expression9 (p):
-    '''expression : ID LBRACKET expression RBRACKET'''
-    print "expression9"
-
-def p_expression10 (p):
-    '''expression : INTNUMBER'''
-    print "expression10"
-
-def p_expression11 (p):
-    '''expression : FLOATNUMBER'''
-    print "expression11"
-
-def p_expression12 (p):
-    '''expression : INT LPARENT expression RPARENT'''
-    print "expression12"
-
-def p_expression13 (p):
-    '''expression : FLOAT LPARENT expression RPARENT'''
-    print "expression13"
-
-def p_expression_list (p):
-    '''expression_list : expression'''
-    print "expression_list"
-
-def p_expression_list2 (p):
-    '''expression_list : expression COMMA expression'''
-    print "expression_list2"
-
-def p_expression_listEmpty (p):
-    '''expression_list : empty'''
+def p_adding_operator3 (p):
+    '''adding_operator : empty'''
     print "nulo"
 
-def p_relation (p):
-    '''relation : expression GREATER expression'''
-    print "relation"
+def p_term (p):
+    '''term : factor multiplying_operator'''
+    print "term"
 
-def p_relation2 (p):
-    '''relation : expression LESS expression'''
-    print "relation2"
+def p_multiplying_operator (p):
+    '''multiplying_operator : multiplying factor'''
+    print "multiplying_operator"
 
-def p_relation3 (p):
-    '''relation : expression GREATEREQUEAL expression'''
-    print "relation3"
+def p_multiplying_operator2 (p):
+    '''multiplying_operator : multiplying_operator multiplying factor  '''
+    print "multiplying_operator2"
 
-def p_relation4 (p):
-    '''relation : expression LESSEQUAL expression'''
-    print "relation4"
+def p_multiplying_operator3 (p):
+    '''multiplying_operator : empty'''
+    print "multiplying_operator3"
 
-def p_relation5 (p):
-    '''relation : expression DISTINT expression'''
-    print "relation5"
+def p_factor (p):
+    '''factor : aplication'''
+    print "factor"
 
-def p_relation6 (p):
-    '''relation : expression NOT expression'''
-    print "relation6"
+def p_factor2 (p):
+    '''factor : variable'''
+    print "factor2"
 
-def p_relation7 (p):
-    '''relation : expression OR expression'''
-    print "relation7"
+def p_factor3 (p):
+    '''factor : constant'''
+    print "factor3"
 
-def p_relation8 (p):
-    '''relation : expression AND expression'''
-    print "relation8"
+def p_factor4 (p):
+    '''factor : LPARENT expression RPARENT'''
+    print "factor4"
 
-def p_relation9 (p):
-    '''relation : NOT expression'''
-    print "relation9"
+def p_factor5 (p):
+    '''factor : NOT factor'''
+    print "factor5"
 
-def p_relation10 (p):
-    '''relation : LPARENT expression RPARENT'''
-    print "relation10"
+def p_relational_operator (p):
+    '''relational_operator : EQUAL'''
+    print "relational_operator"
+
+def p_relational_operator2 (p):
+    '''relational_operator : GREATER'''
+    print "relational_operator2"
+
+def p_relational_operator3 (p):
+    '''relational_operator : GREATEREQUEAL'''
+    print "relational_operator3"
+
+def p_relational_operator4 (p):
+    '''relational_operator : LESS'''
+    print "relational_operator4"
+
+def p_relational_operator5 (p):
+    '''relational_operator : LESSEQUAL'''
+    print "relational_operator"
+
+def p_relational_operator6 (p):
+    '''relational_operator : LESSGREATER'''
+    print "relational_operator6"
+
+def p_operator (p):
+    '''operator : PLUS'''
+    print "operator"
+
+def p_operator2 (p):
+    '''operator : MINUS'''
+    print "operator2"
+
+def p_operator3 (p):
+    '''operator : OR'''
+    print "operator3"
+
+def p_multiplying (p):
+    '''multiplying : ASTERIK'''
+    print "multiplying"
+
+def p_multiplying2 (p):
+    '''multiplying : SLASH'''
+    print "multiplying"
+
+def p_multiplying3 (p):
+    '''multiplying : AND'''
+    print "multiplying3"
+
+def p_variable (p):
+    '''variable : ID'''
+    print "variable"
+
+def p_variable2 (p):
+    '''variable : ID LPARENT expression RPARENT'''
+    print "variable2"
+
+def p_constant (p):
+    '''constant : INTNUMBER'''
+    print "constant"
+
+def p_constant2 (p):
+    '''constant : FLOATNUMBER'''
+    print "constant2"
+
+def p_constant3 (p):
+    '''constant : ID'''
+    print "constant3"
+
+def p_constant4 (p):
+    '''constant : CHAR'''
+    print "constant4"
+
+def p_constant5 (p):
+    '''constant : STRING'''
+    print "constant5"
 
 def p_empty (p):
     '''empty :'''
@@ -274,6 +394,7 @@ def p_empty (p):
 def p_error (p):
     print "error de sintaxis",p
     print "error en la linea "+str(p.lineno)
+
 
 #BBusca y muestra los archivos de una ubicacion
 def buscarFichero(directorio):

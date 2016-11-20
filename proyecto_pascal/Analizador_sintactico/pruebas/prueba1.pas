@@ -1,10 +1,11 @@
-FUN quicksort( l:INT, r:INT )
-	i:INT;
-	j:FLOAT;
-BEGIN     (*esto es un comentario *)
-	J := 5.324;
-	PRINT("exito ");
-	WHILE i < 3 DO
-	i := 45;
-	PRINT("exito")
-END
+program fib;
+fun fib(n:int):int;
+  begin
+    if n=0 then
+      fib:=1
+    else
+      fib:=n*fib(n-1);
+  end
+begin
+  writeln(fib(10));
+end.

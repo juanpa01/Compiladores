@@ -1,31 +1,21 @@
-fun main()
-	v:INT[8192];
-	i:INT;
-	n:INT;
+program forstatement;
+var x,sum:int;
+var c:char;
 begin
-	print("Entre n: ");
-	READ(n);
-	i := 0 ;
-	WHILE i < n DO
-	BEGIN
-		READ(v[i]);
-		i := i+1
-	END;
+  sum:=0;
+  for x := 1 to 10 do
+    sum:=sum+x;
+  writeln(sum);
 
-	i := 0  ;
-	WHILE i < n-1 DO
-	BEGIN
-		WRITE(v[i]); PRINT(" ");
-		IF 0 < v[i] + v[i+1] THEN
-		BEGIN
-			PRINT("Quicksort falló");
-			write(i);
-			PRINT("\n");
-			RETURN 0
-		END
-		ELSE
-			i := i + 1
-	END;
-	WRITE(v[i]);
-	PRINT("Éxito\n")
-END
+  sum:=0;
+  for x := 10 downto 1 do
+    sum:=sum+x;
+  writeln(sum);
+
+  for c := 'a' to 'c' do
+    write(c);
+  writeln;
+  for c := 'c' downto 'a' do
+    write(c);
+  writeln;
+end.

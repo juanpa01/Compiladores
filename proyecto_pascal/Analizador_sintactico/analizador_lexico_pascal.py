@@ -5,7 +5,7 @@ import codecs
 import os
 
 #Palabras reservadas del sistema
-reservadas = ['ELSE','IF','INT','FLOAT','RETURN','WHILE','FUN','BEGIN','DO','THEN',
+reservadas = ['WRITELN','DOWNTO','TO','FOR','READLN','VAR','BOOLEAN','CHAR','STRING','PROGRAM','CONST','ELSE','IF','INT','FLOAT','RETURN','WHILE','FUN','BEGIN','DO','THEN',
             'END','PRINT','READ','WRITE','SKIP','BREAK','AND','OR','NOT',]
                         #simbolos
 tokens = reservadas + ['PLUS','MINUS','ASTERIK','SLASH','EQUAL','LESS',
