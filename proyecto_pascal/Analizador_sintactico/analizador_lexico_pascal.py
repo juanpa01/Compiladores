@@ -71,6 +71,10 @@ def t_INTNUMBER (t):
     t.value = int(t.value)
     return t
 
+def t_CHAR (t):
+    r'\'[a-zA-Z_]\''
+    return t
+
 def t_TEXT (t):
     r'"[^\n]*?(?<!\\)"'
     temp_str = t.value.replace(r'\\', '')
