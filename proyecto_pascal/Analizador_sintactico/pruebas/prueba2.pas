@@ -1,13 +1,14 @@
 program forstatement;
+const prueba = 342, otro_ID = 432.12;
+const ID = 32;
 var x,sum:int;
 var c:char;
 begin
-  sum:=0;
+  sum := 0;
   for x := 1 to 10 do
     sum:=sum+x;
   writeln(sum);
-
-  sum:=0;
+  sum := 0;
   for x := 10 downto 1 do
     sum:=sum+x;
   writeln(sum);
