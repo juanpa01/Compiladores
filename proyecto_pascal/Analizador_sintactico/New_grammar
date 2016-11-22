@@ -1,20 +1,20 @@
 
-program :  PROGRAM ID ; block .
-block :    constant-definition-part variable-declaration-part function-declaration-part statement-part
+program :  PROGRAM ID SEMICOLON block
+block :    constant_definition_part variable_declaration_part function_declaration_part class_declaration_part  statement-part
 
-constant_definitio_-part :  CONST constant_definition  ;
+constant_definitio_-part :  CONST constant_definition  SEMICOLON
                             empty
 
 constant_definition : ID constant_definition
-                      , ID
-                      = INTNUMBER constant_definition
-                      ID = INTNUMBER
+                      COMMA ID
+                      EQUAL INTNUMBER constant_definition
+                      ID EQUAL INTNUMBER
 
-variable_declaration_part : variable_declaration_part VAR id_list : type ;
+variable_declaration_part : variable_declaration_part VAR id_list COLON type SEMICOLON
                             empty
 
 id_list : ID
-          id_list , ID
+          id_list COMMA ID
 
 type : INT
        FLOAT
@@ -22,13 +22,35 @@ type : INT
        CHAR
        BOOLEAN
 
-function_declaration_part : FUN ID arguments : type ; block
+function_declaration_part : FUN ID arguments COLON type SEMICOLON block
+--------------------------------------------------------------------------------
+class_declaration_part :  TYPE ID EQUAL CLASS class_declaration END SEMICOLON function_cconstructor_part
+                          empty
 
-arguments : (parameter_list)
+class_decalration : type_class SEMICOLON
+                    class_declaration SEMICOLON type_class
+
+type_class : PRIVATE id_list COLON type
+             PUBLIC type_public
+             empty
+
+type_public : CONSTRUCTOR CREATE arguments
+              type_public SEMICOLON FUN ID arguments COLON type
+              empty
+
+arguments : LPARENT RPARENT
+            LPARENT parameter_list RPARENT
             empty
 
-parameter_list : id_list : type
-                parameter_list ; id_list : type
+function_constructor_part : variable_declaration_part constructor_part Function_part
+
+constructor_part : CONSTRUCTOR ID PERIOD CREATE arguments SEMICOLON stament_part SEMICOLON
+
+function_part : FUN ID PERIOD ID arguments COLON type SEMICOLON stament_part SEMICOLON
+
+-------------------------------------------------------------------------------
+parameter_list : id_list COLON type
+                parameter_list SEMICOLON id_list COLON type
 
 stament_part : compound_stament
 
